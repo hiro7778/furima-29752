@@ -5,7 +5,16 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  describe 'ユーザー新規登録' do
+  describe 'ユーザー新規登録正常系' do
+    context 'ユーザー情報、本人情報確認' do
+      it 'ユーザー本名が、名字と名前がそれぞれあると登録できる' do
+        @user = FactoryBot.build(:user)
+        expect(@user).to be_valid
+      end
+    end
+  end
+
+  describe 'ユーザー新規登録異常系' do
     context 'ユーザー情報' do
       it "ニックネームがないと登録できない" do
         @user.nickname = nil
@@ -19,8 +28,8 @@ RSpec.describe User, type: :model do
       end
       it 'メールアドレスが一意性でないと登録できない' do
         @user.save
-        @another_user = FactoryBot.build(:user, email: @user.email)
-        @another_user.valid?
+        another_user = FactoryBot.build(:user, email: @user.email)
+        another_user.valid?
         expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it 'メールアドレスは@を含む必要があること' do
@@ -58,6 +67,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
+      it 
       it 'ユーザー本名は全角（漢字・ひらがな・カタカナ）でないと登録できない' do
         @user.last_name = nil
         @user.valid?
