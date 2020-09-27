@@ -5,11 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname,             presence: true
-  validates :birth_date,           presence: true 
+  validates :birth_date,           presence: true
+  validates :email,                presence: true
 
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
     validates :first_name
     validates :last_name
+  end
+
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "全角カタカナのみで入力して下さい"} do
     validates :first_name_kana
     validates :last_name_kana
   end

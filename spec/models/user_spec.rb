@@ -5,17 +5,16 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  describe 'ユーザー新規登録正常系' do
-    context 'ユーザー情報、本人情報確認' do
-      it 'ユーザー本名が、名字と名前がそれぞれあると登録できる' do
+  describe 'ユーザー新規登録' do
+
+    context 'ユーザー情報正常系' do
+      it '全ての正常系テストコード' do
         @user = FactoryBot.build(:user)
         expect(@user).to be_valid
       end
     end
-  end
 
-  describe 'ユーザー新規登録異常系' do
-    context 'ユーザー情報' do
+    context 'ユーザー情報異常系' do
       it "ニックネームがないと登録できない" do
         @user.nickname = nil
         @user.valid?
@@ -62,21 +61,30 @@ RSpec.describe User, type: :model do
     end
 
     context '本人情報確認' do
-      it 'ユーザー本名が、名字と名前がそれぞれないと登録できない' do
+      it 'ユーザー本名が、名字がないと登録できない' do
         @user.last_name = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
-      it 
+      it 'ユーザー本名が、名前がないと登録できない' do
+        @user.first_name = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
       it 'ユーザー本名は全角（漢字・ひらがな・カタカナ）でないと登録できない' do
         @user.last_name = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name 全角文字を使用してください")
       end
-      it 'ユーザー本名のフリガナが、名字と名前でそれぞれないと登録できない' do
+      it 'ユーザー本名のフリガナが、名字がないと登録できない' do
         @user.last_name_kana = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
+      it 'ユーザー本名のフリガナが、名前がないと登録できない' do
+        @user.first_name_kana = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
       it 'ユーザー本名のフリガナは全角（カタカナ）で入力させること' do
         @user.last_name_kana = nil
