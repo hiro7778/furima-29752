@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, :explain, :price, :category, :conditions_id, :shipping_fees_id, :prefectures_id, :shipping_date_id, presence: true
+  validates :name, :explain, :price, :category_id, :conditions_id, :shipping_fees_id, :prefectures_id, :shipping_date_id, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
 
   extend ActiveHash::Associations::ActiveRecordExtensions
