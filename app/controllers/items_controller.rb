@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to items_path
     else
-      render :index
+      render 'new'
     end
   end
 
