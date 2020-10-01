@@ -60,11 +60,11 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
       it '販売価格は全角数字では保存できない' do
-        @item.price = "１１１１"
+        @item.price = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Price 半角数字のみで入力して下さい")
       end
     end
-    
+
   end
 end

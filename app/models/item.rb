@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   validates :name, :explain, :price, :category_id, :conditions_id, :shipping_fees_id, :prefectures_id, :shipping_date_id, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
 
-  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/, message: "半角数字のみで入力して下さい"} do
+  with_options presence: true, format: { with: /\A[0-9]+\z/, message: "半角数字のみで入力して下さい"} do
     validates :price
   end
 
