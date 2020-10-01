@@ -16,9 +16,12 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture 
   belongs_to_active_hash :shipping_date
 
-  validates :category_id, numericality: { other_than: 1 }
-  validates :conditions_id, numericality: { other_than: 1 }
-  validates :shipping_fees_id, numericality: { other_than: 1 }
-  validates :prefectures_id, numericality: { other_than: 1 }
-  validates :shipping_date_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :conditions_id
+    validates :shipping_fees_id
+    validates :prefectures_id
+    validates :shipping_date_id
+  end
+  
 end
