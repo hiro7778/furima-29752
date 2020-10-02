@@ -14,6 +14,12 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品出品機能の異常系' do
+      it '商品名と画像がないと出品できない' do
+        @item.name = nil
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Name can't be blank")
+      end
       it '商品名がないと出品できない' do
         @item.name = nil
         @item.valid?
@@ -59,8 +65,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
+      it '価格の範囲が、¥300~¥9,999,999の間でないと出品できない' do
+        @item.price = 100000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
       it '販売価格は全角数字では保存できない' do
-        @item.price = ""
+        @item.price = "１１１１"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price 半角数字のみで入力して下さい")
       end
