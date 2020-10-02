@@ -74,6 +74,32 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price 半角数字のみで入力して下さい")
       end
+      it 'カテゴリーは１では出品できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it '商品状態は１では出品できない' do
+        @item.conditions_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Conditions must be other than 1")
+      end
+      it '配送料は１では出品できない' do
+        @item.shipping_fees_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fees must be other than 1")
+      end
+      it '発送元の地域は１では出品できない' do
+        @item.prefectures_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefectures must be other than 1")
+      end
+      it '発送までの日数は１では出品できない' do
+        @item.shipping_date_id = 1
+        @item.valid?
+        binding.pry
+        expect(@item.errors.full_messages).to include("Shipping date must be other than 1")
+      end
     end
 
   end
