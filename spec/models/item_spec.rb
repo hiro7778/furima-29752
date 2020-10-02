@@ -97,7 +97,6 @@ RSpec.describe Item, type: :model do
       it '発送までの日数は１では出品できない' do
         @item.shipping_date_id = 1
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Shipping date must be other than 1")
       end
     end
