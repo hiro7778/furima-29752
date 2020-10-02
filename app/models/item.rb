@@ -2,9 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  def was_attached?
-    self.image.attached?
-  end
+  validates :image, presence: true, unless: :was_attached?
 
   validates :name, :explain, :price, :category_id, :conditions_id, :shipping_fees_id, :prefectures_id, :shipping_date_id, presence: true
 
@@ -24,6 +22,12 @@ class Item < ApplicationRecord
     validates :shipping_fees_id
     validates :prefectures_id
     validates :shipping_date_id
+  end
+
+  private
+
+  def was_attached?
+    self.image.attached?
   end
   
 end
