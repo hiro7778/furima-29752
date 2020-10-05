@@ -5,7 +5,7 @@ class PurchaseAddress
   with_options presence: true do
     validates :post_code,    format: { with: /\A[0-9]+\z/, message: "半角数字のみで入力して下さい"}
     validates :city,         format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: "全角文字を使用してください"}
-    validates :address
+    validates :house_number
     validates :phone_number, format: { with: /\A[0-9]+\z/, message: "半角数字のみで入力して下さい"}
   end
 

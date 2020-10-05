@@ -32,7 +32,7 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase_address).premit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(token: params[:token])
+    params.require(:purchase_address).premit(:post_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id).merge(token: params[:token])
   end
 
   def pay_item
