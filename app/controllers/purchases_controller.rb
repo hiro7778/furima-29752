@@ -1,7 +1,8 @@
 class PurchasesController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+
   def index
-    @item = Item.find(params[:item_id])
-    @purchase = Address.new
+    @purchase = PurchaseAddress.new
 
     if current_user.id == @item.user_id
       redirect_to root_path
@@ -13,8 +14,7 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    @purchase = Address.new(purchase_params)
+    @purchase = PurchaseAddress.new(purchase_params)
 
     if @purchase.valid?
       pay_item
@@ -27,8 +27,12 @@ class PurchasesController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def purchase_params
-    params.require(:address).premit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(token: params[:token])
+    params.require(:purchase_address).premit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(token: params[:token])
   end
 
   def pay_item
