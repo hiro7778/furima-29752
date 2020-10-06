@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @bought = Purchase.where(item_id: @item.id)
   end
 
   def edit
