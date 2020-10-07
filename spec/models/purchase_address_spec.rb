@@ -48,7 +48,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号が11桁以上のとき' do
+      it '電話番号が12桁以上のとき' do
         @purchase_address.phone_number = '090123456789'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number 半角数字10桁もしくは11桁で入力して下さい")
