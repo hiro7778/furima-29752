@@ -35,17 +35,17 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品状態を選択しないと出品できない' do
-        @item.conditions_id = nil
+        @item.condition_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Conditions can't be blank")
       end
       it '配送料について選択しないと出品できない' do
-        @item.shipping_fees_id = nil
+        @item.shipping_fee_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fees can't be blank")
       end
       it '発送元の地域の選択をしないと出品できない' do
-        @item.prefectures_id = nil
+        @item.prefecture_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefectures can't be blank")
       end
@@ -80,17 +80,17 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it '商品状態は１では出品できない' do
-        @item.conditions_id = 1
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Conditions must be other than 1")
       end
       it '配送料は１では出品できない' do
-        @item.shipping_fees_id = 1
+        @item.shipping_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fees must be other than 1")
       end
       it '発送元の地域は１では出品できない' do
-        @item.prefectures_id = 1
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefectures must be other than 1")
       end
