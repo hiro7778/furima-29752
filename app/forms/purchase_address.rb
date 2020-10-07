@@ -6,7 +6,7 @@ class PurchaseAddress
     validates :post_code,    format: { with: /\A\d{3}[-]\d{4}\z/, message: "半角数字とハイフンで入力して下さい"}
     validates :city,         format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: "全角文字を使用してください"}
 
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: "半角数字11桁で入力して下さい"}
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "半角数字10桁もしくは11桁で入力して下さい"}
   end
 
   validates :token, presence: true
